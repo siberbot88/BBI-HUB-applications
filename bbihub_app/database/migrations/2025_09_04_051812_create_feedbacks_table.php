@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id');
-            $table->foreignId('user_id');
+            $table->foreignId('service_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->unsignedTinyInteger('rating')
                 ->nullable()
                 ->check('rating BETWEEN 1 AND 5');

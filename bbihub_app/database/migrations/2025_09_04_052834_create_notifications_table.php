@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->enum('type', ['new task','reminder','update'])->default('reminder');
             $table->text('message');
             $table->boolean('is_read')->default(false);

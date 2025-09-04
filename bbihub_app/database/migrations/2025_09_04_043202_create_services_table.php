@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('workshop_id');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('workshop_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('customer_name');
             $table->string('customer_phone');
             $table->enum('vehicle_type', ['car', 'motorcycle'])->default('motorcycle');
             $table->string('vehicle_models');
             $table->string('license_plate');
-            $table->string('service_type');
+            $table->enum('service_category', ['maintenance','repair','sparepart replacement','emergency'])->default('maintenance');
             $table->enum('service_mode', ['on demand','booking'])->default('on demand');
             $table->enum('service_option', ['on site','in workshop'])->default('on site');
             $table->text('problem_description');

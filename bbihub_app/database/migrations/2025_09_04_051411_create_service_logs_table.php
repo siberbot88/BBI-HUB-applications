@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('service_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id');
+            $table->foreignId('service_id')->constrained()->cascadeOnDelete();
             $table->enum('step',['pre_check','work_log','post_check','report'])->default('pre_check');
             $table->text('description');
             $table->string('image');

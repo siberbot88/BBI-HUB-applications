@@ -19,8 +19,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'workshop_id',
+        'phone',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -44,5 +47,23 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function workshops()
+    {
+        return $this->belongsTo(Workshop::class);
+    }
+
+    public function services(){
+        return $this->hasMany(Service::class);
+    }
+
+    public function audit_logs(){
+        return $this->hasOne(Audit_log::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 }
